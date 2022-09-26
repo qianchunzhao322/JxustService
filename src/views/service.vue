@@ -26,7 +26,7 @@
           </el-menu-item>
           <el-menu-item index="/service/class">
             <i class="el-icon-s-custom"></i>
-            <span slot="title">研究生</span>
+            <span slot="title">研究生(未改)</span>
           </el-menu-item>
           <el-menu-item index="/service/class">
             <i class="el-icon-bangzhu"></i>
