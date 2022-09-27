@@ -118,7 +118,7 @@ export default {
     initWebSocket () {
       var that = this
       if ('WebSocket' in window) {
-        var socketUrl = 'ws://10.21.213.47:8081/api/pushMessage/' + this.username + '_' + new Date().getTime()
+        var socketUrl = 'ws://10.21.250.56:8081/api/pushMessage/' + this.username + '_' + new Date().getTime()
         that.ws = new WebSocket(socketUrl)
         that.webSocket.setWs(that.ws)
 

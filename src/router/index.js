@@ -10,6 +10,7 @@ import info from '../views/service/info'
 import sex from '../views/service/sex'
 import superman from '../views/service/superman'
 import teacher from '../views/service/teacher'
+import underGraduation from '../views/service/undergraduation'
 import togo from '../views/service/togo'
 import building from '../views/service/photo/building'
 import campus from '../views/service/photo/campus'
@@ -57,6 +58,10 @@ const routes = [{
     path: '/service/teacher',
     name: 'teacher',
     component: teacher
+  }, {
+    path: '/service/underGraduation',
+    name: 'underGraduation',
+    component: underGraduation
   }, {
     path: '/service/superman',
     name: 'superman',

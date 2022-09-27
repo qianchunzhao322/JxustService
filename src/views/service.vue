@@ -24,9 +24,9 @@
             <i class="el-icon-user"></i>
             <span slot="title">师生管理</span>
           </el-menu-item>
-          <el-menu-item index="/service/class">
+          <el-menu-item index="/service/underGraduation">
             <i class="el-icon-s-custom"></i>
-            <span slot="title">研究生(未改)</span>
+            <span slot="title">研究生</span>
           </el-menu-item>
           <el-menu-item index="/service/class">
             <i class="el-icon-bangzhu"></i>
@@ -139,6 +139,9 @@ export default {
         this.timeVisiable = true
       } else if (key === '/service/teacher') {
         this.bread = '师生管理'
+        this.timeVisiable = true
+      } else if (key === '/service/underGraduation') {
+        this.bread = '研究生管理'
         this.timeVisiable = true
       } else if (key === '/service/class') {
         this.bread = '班级管理'

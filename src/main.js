@@ -19,7 +19,7 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 // 请求超时4分钟
 // axios.defaults.timeout = 240000;
 const service = axios.create({
-  baseURL: 'http://10.21.213.47:8081',
+  baseURL: 'http://10.21.250.56:8081',
   // baseURL: 'http://39.108.181.54:8081',
   // 超时
   timeout: 240000

@@ -75,7 +75,7 @@
 
 <script>
 export default {
-  name: 'class',
+  name: 'underGraduation',
   data () {
     return {
       id: null,
@@ -105,7 +105,7 @@ export default {
       this.getData()
     },
     getData () {
-      this.$axios.get('/juxtserver/class/getData', { params: { type: '本科生' } }).then((res) => {
+      this.$axios.get('/juxtserver/class/getData', { params: { type: '研究生' } }).then((res) => {
         if (res.data.status === 200 && res.data.msg === '所有专业班级数据获取成功') {
           this.data = res.data.data
           this.id = res.data.data[0].maxId
@@ -148,7 +148,7 @@ export default {
       const formData = new FormData()
       var that = this
       formData.append('id', this.id++)
-      formData.append('type', '本科生')
+      formData.append('type', '研究生')
       if (data.level === 1) {
         formData.append('label', '年份')
         formData.append('year', that.form.year)
@@ -192,7 +192,7 @@ export default {
       const formData = new FormData()
       var that = this
       formData.append('id', node.id)
-      formData.append('type', '本科生')
+      formData.append('type', '研究生')
       if (data.level === 2) {
         formData.append('label', '年份')
         formData.append('year', that.newForm.year)
@@ -235,7 +235,7 @@ export default {
       if (node.level === 4) {
         label = '班级'
       }
-      this.$axios.get('/juxtserver/class/deleteData', { params: { id: data.id, label: label, type: '本科生' } }).then((res) => {
+      this.$axios.get('/juxtserver/class/deleteData', { params: { id: data.id, label: label, type: '研究生' } }).then((res) => {
         if (res.data.status === 200) {
           this.$message({ type: 'success', message: res.data.msg })
           this.getData()
