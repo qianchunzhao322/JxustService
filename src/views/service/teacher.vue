@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <el-button type="primary"
-                 @click="pushData"
+                 @click="newDialogFormVisible = true"
                  plain>新增</el-button>
     <el-table
     :data="tableData"
@@ -18,53 +18,28 @@
     >
   </el-table-column>
   <el-table-column
-    label="在职教师"
-    >
-    教授
-  </el-table-column>
-  <el-table-column
     prop="professor"
-    label="人数"
+    label="教授"
     >
-  </el-table-column>
-  <el-table-column
-    label="在职教师"
-    >
-    副教授
   </el-table-column>
   <el-table-column
     prop="associateProfessor"
-    label="人数"
+    label="副教授"
     >
-  </el-table-column>
-  <el-table-column
-    label="在职教师"
-    >
-    讲师
   </el-table-column>
     <el-table-column
       prop="lecturer"
-      label="人数"
+      label="讲师"
       >
     </el-table-column>
-  <el-table-column
-    label="在校学生"
-    >
-    本科生
-  </el-table-column>
     <el-table-column
       prop="undergrad"
-      label="人数"
+      label="本科生"
       >
     </el-table-column>
-  <el-table-column
-    label="在校学生"
-    >
-    研究生
-  </el-table-column>
     <el-table-column
       prop="postgraduate"
-      label="人数"
+      label="研究生"
       >
     </el-table-column>
     <el-table-column
@@ -84,6 +59,17 @@
       </template>
     </el-table-column>
   </el-table>
+  <el-dialog title="新增数据" :visible.sync="newDialogFormVisible">
+  <el-form :model="newForm">
+    <el-form-item label="年份" :label-width="formLabelWidth">
+      <el-input v-model="newForm.year" autocomplete="off"></el-input>
+    </el-form-item>
+  </el-form>
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="newDialogFormVisible = false">取 消</el-button>
+    <el-button type="primary" @click="append">确 定</el-button>
+  </div>
+</el-dialog>
   <el-dialog title="更新数据" :visible.sync="dialogFormVisible">
   <el-form :model="form">
     <el-form-item label="年份" :label-width="formLabelWidth">
@@ -120,6 +106,10 @@ export default {
     return {
       tableData: [],
       dialogFormVisible: false,
+      newDialogFormVisible: false,
+      newForm: {
+        year: ''
+      },
       form: {
         year: '',
         professor: '',
@@ -156,10 +146,10 @@ export default {
       this.form.undergrad = row.undergrad
       this.form.postgraduate = row.postgraduate
     },
-    pushData () {
-      this.dialogFormVisible = false
+    append () {
+      this.newDialogFormVisible = false
       const formData = {}
-      formData.year = 0
+      formData.year = this.newForm.year
       formData.postgraduate = 0
       formData.undergrad = 0
       formData.associateProfessor = 0
@@ -173,6 +163,7 @@ export default {
         if (res.data.status === 200) {
           this.$message({ type: 'success', message: res.data.msg })
           this.getData()
+          this.newForm.year = ''
         } else {
           this.$message({ type: 'error', message: res.data.msg })
         }

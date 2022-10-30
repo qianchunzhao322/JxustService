@@ -53,7 +53,7 @@
           </el-select>
         </el-form-item>
         <el-form-item v-if="value"
-                      label="新增类别"
+                      label="新增性别"
                       :label-width="formLabelWidth">
                       <el-select v-model="form.value"
                      style="width:100%"

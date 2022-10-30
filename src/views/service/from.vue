@@ -43,6 +43,11 @@
                       <el-input v-model="form.label"
                     autocomplete="off"></el-input>
         </el-form-item>
+        <el-form-item v-if="level" label="新增生源数"
+                      :label-width="formLabelWidth">
+                      <el-input v-model="form.num"
+                    autocomplete="off"></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer"
            class="dialog-footer">
@@ -83,7 +88,8 @@ export default {
       level: false,
       form: {
         year: null,
-        label: ''
+        label: '',
+        num: null
       },
       newForm: {
         year: null
@@ -143,7 +149,7 @@ export default {
       }
       if (data.level === 2) {
         formData.append('label', that.form.label)
-        formData.append('value', 0)
+        formData.append('value', that.form.num)
         formData.append('grade', node.label)
       }
       that.$axios.post('/juxtserver/province/pushData', formData, {
@@ -154,6 +160,7 @@ export default {
         if (res.data.status === 200) {
           that.$message({ type: 'success', message: res.data.msg })
           that.getData()
+          that.form.num = ''
         } else {
           that.$message({ type: 'error', message: res.data.msg })
         }

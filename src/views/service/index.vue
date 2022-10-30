@@ -123,13 +123,20 @@ export default {
 
       eFristex: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
       eFristey: [64, 159, 112, 86, 151, 131, 118],
-      eSecondType: ['电信大类', '计算机大类'],
-      eSecondData1: [23, 84],
-      eSecondData2: [13, 54],
-      eThirdYear: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'],
-      eThirdPro: [400, 400, 300, 300, 300, 400, 400, 400, 300],
-      eThirdCon: [400, 500, 500, 500, 500, 400, 400, 500, 500],
-      eThirdSum: [400, 600, 700, 700, 1000, 400, 400, 600, 700]
+      // eSecondType: ['电信大类', '计算机大类'],
+      // eSecondData1: [23, 84],
+      // eSecondData2: [13, 54],
+      // eThirdYear: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019'],
+      // eThirdPro: [400, 400, 300, 300, 300, 400, 400, 400, 300],
+      // eThirdCon: [400, 500, 500, 500, 500, 400, 400, 500, 500],
+      // eThirdSum: [400, 600, 700, 700, 1000, 400, 400, 600, 700]
+      eSecondType: null,
+      eSecondData1: null,
+      eSecondData2: null,
+      eThirdYear: null,
+      eThirdPro: null,
+      eThirdCon: null,
+      eThirdSum: null
 
     }
   },
@@ -203,11 +210,14 @@ export default {
       await this.$axios.get('/jlclient/sex').then((res) => {
         if (res.data.status === 200 && res.data.msg === '请求成功') {
           this.eSecondType = res.data.data.major
-          this.eSecondData1 = res.data.data.major1
-          this.eSecondData2 = res.data.data.major2
+          this.eSecondData1 = res.data.data.woman
+          this.eSecondData2 = res.data.data.man
           this.drawSecond(this.eSecondType, this.eSecondData1, this.eSecondData2)
         } else {
           this.$message({ type: 'danger', message: '男女图表数据获取失败，请刷新' })
+          this.eSecondType = ['电信大类', '计算机大类']
+          this.eSecondData1 = [0, 0]
+          this.eSecondData2 = [0, 0]
         }
       })
     },
@@ -221,6 +231,9 @@ export default {
           this.drawThird(this.eThirdYear, this.eThirdPro, this.eThirdCon, this.eThirdSum)
         } else {
           this.$message({ type: 'danger', message: '柱状图表数据获取失败，请刷新' })
+          this.eThirdPro = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+          this.eThirdCon = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+          this.eThirdSum = [0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
       })
     },

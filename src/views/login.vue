@@ -69,6 +69,12 @@ export default {
     this.init()
     localStorage.removeItem('btapex')
   },
+  mounted () {
+    window.addEventListener('keydown', this.keyDown)// 监听用户回车事件
+  },
+  destroyed () {
+    window.removeEventListener('keydown', this.keyDown)// 销毁回车事件，如果不销毁，在其他页面敲回车也会执行回车登录操作。
+  },
   methods: {
     init () {
       this.$axios.get('/juxtserver/captcha', {
@@ -80,6 +86,19 @@ export default {
         }).then(res => {
           this.codeImg = res
         })
+    },
+    keyDown (e) {
+      if (e.keyCode === 13) { // 13是回车键的keycode
+        if (this.username !== '' && this.password !== '') {
+          if (this.dialogVisible === false) {
+            this.dialogVisible = true
+          } else {
+            this.login()
+          }
+        } else {
+          this.$message({ type: 'warning', message: '啥账号都没有，你登陆个der' })
+        }
+      }
     },
     login () {
       this.dialogVisible = false
@@ -99,9 +118,10 @@ export default {
       }).then((res) => {
         if (res.data.status === 200 && res.data.msg === '登录成功') {
           this.$message.success('登录成功')
-          this.initWebSocket()
+          // websocket初衷是为了实现QQ般的实时监测同账号单用户，同账号多用户时会强制下线，
+          // 当数据悼亡该功能暂时性废除
+          // this.initWebSocket()
           localStorage.setItem('btapex', res.data.data.token)
-          // this.$cookies.set('token', res.data.data.token, 60)
           this.$router.push({
             name: 'index',
             params: {
@@ -115,10 +135,11 @@ export default {
         console.log(res)
       })
     },
+    // websocket连接  注意其中的IP要改
     initWebSocket () {
       var that = this
       if ('WebSocket' in window) {
-        var socketUrl = 'ws://10.21.250.56:8081/api/pushMessage/' + this.username + '_' + new Date().getTime()
+        var socketUrl = 'ws://10.21.68.56/api/pushMessage/' + this.username + '_' + new Date().getTime()
         that.ws = new WebSocket(socketUrl)
         that.webSocket.setWs(that.ws)
 

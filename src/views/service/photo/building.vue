@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="head">
-      <el-input placeholder="请输入校区"
+      <el-input placeholder="请输入校区名称"
                 v-model="campus">
       </el-input>
       <el-input placeholder="请输入照片名称"
@@ -87,10 +87,18 @@
       <el-dialog title="新增打卡点"
                  :visible.sync="newDialogFormVisible">
         <el-form :model="newForm">
-          <el-form-item label="校区名称"
+          <el-form-item label="所在校区"
                         :label-width="formLabelWidth">
-            <el-input v-model="newForm.campus"
-                      autocomplete="off"></el-input>
+            <el-select v-model="newForm.campus"
+                       style="width:100%"
+                       clearable
+                       placeholder="请选择所在校区">
+              <el-option v-for="item in yearOptions"
+                         :key="item.value"
+                         :label="item.label"
+                         :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
           <el-form-item label="照片名称"
                         :label-width="formLabelWidth">
@@ -168,6 +176,10 @@ export default {
         name: '',
         campus: ''
       },
+      yearOptions: [{
+        label: 1999,
+        value: 1999
+      }],
       formLabelWidth: '120px'
     }
   },
@@ -176,7 +188,17 @@ export default {
   },
   methods: {
     init () {
+      this.getCampus()
       this.getData()
+    },
+    getCampus () {
+      this.$axios.get('/jlclient/getItems/getCampus').then((res) => {
+        if (res.data.status === 200 && res.data.msg === '请求成功') {
+          this.yearOptions = res.data.data.campus
+        } else {
+          this.$message({ type: 'error', message: res.data.msg })
+        }
+      })
     },
     getData () {
       this.$axios.get('/juxtserver/photo/building/getData').then((res) => {
@@ -241,7 +263,8 @@ export default {
       if (isJPG && isLt2M) {
         const formData = new FormData()
         formData.append('image', file.raw)
-        await that.$axios.post('/admin/uploadImg', formData, {
+        await that.$axios.post('admin/uploadImg', formData, {
+        // await that.$axios.post('common/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

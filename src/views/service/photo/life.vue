@@ -216,31 +216,25 @@ export default {
       this.getItemsYears()
     },
     async getItemsYears () {
-      this.$axios.defaults.baseURL = 'http://39.108.181.54:8080'
       await this.$axios.get('/jlclient/getItems/getYear').then((res) => {
         if (res.data.status === 200 && res.data.msg === '请求成功') {
           this.newYearOptions = res.data.data.year
         }
       })
-      this.$axios.defaults.baseURL = 'http://39.108.181.54:8081'
     },
     yearChangeToMajor (event) {
-      this.$axios.defaults.baseURL = 'http://39.108.181.54:8080'
       this.$axios.get('/jlclient/getItems/getMajor', { params: { graduateYear: this.newForm.year } }).then((res) => {
         if (res.data.status === 200 && res.data.msg === '请求成功') {
           this.newMajorOptions = res.data.data.major
         }
       })
-      this.$axios.defaults.baseURL = 'http://39.108.181.54:8081'
     },
     majorChangeToClass () {
-      this.$axios.defaults.baseURL = 'http://39.108.181.54:8080'
       this.$axios.get('/jlclient/getItems/getClsss', { params: { graduateYear: this.newForm.year, majorName: this.newForm.major } }).then((res) => {
         if (res.data.status === 200 && res.data.msg === '请求成功') {
           this.newClassOptions = res.data.data.class
         }
       })
-      this.$axios.defaults.baseURL = 'http://39.108.181.54:8081'
     },
     getData () {
       this.$axios.get('/juxtserver/photo/life/getData').then((res) => {

@@ -180,7 +180,8 @@ export default {
     },
     logout () {
       this.visible = false
-      this.webSocket.ws.close()
+      // 这个和登录时连接websocket有关，主动关闭websocket
+      // this.webSocket.ws.close()
       this.$router.push('/login')
       localStorage.removeItem('btapex')
     },
@@ -255,7 +256,7 @@ export default {
           height: 100%;
           width: 33%;
           border-radius: 50%;
-          background: url("../assets/img/3.jpg") no-repeat;
+          background: url("../assets/img/3.png") no-repeat;
           background-size: 100% 100%;
         }
         .name {
