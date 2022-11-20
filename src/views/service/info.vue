@@ -157,6 +157,7 @@ export default {
     init () {
       this.getData()
     },
+    // 获取数据
     getData () {
       this.$axios.get('/juxtserver/info/getData').then((res) => {
         if (res.data.status === 200 && res.data.msg === '所有最新动态数据查询成功') {
@@ -166,6 +167,7 @@ export default {
         }
       })
     },
+    // 增数据
     async pushData () {
       this.newDialogFormVisible = false
       const formData = new FormData()
@@ -188,6 +190,7 @@ export default {
         }
       })
     },
+    // 改数据
     async resetData () {
       this.dialogFormVisible = false
       const formData = new FormData()
@@ -211,6 +214,7 @@ export default {
         }
       })
     },
+    // 查数据
     async search () {
       console.log(this.time)
       const formData = new FormData()
@@ -229,6 +233,7 @@ export default {
         }
       })
     },
+    // 重置数据
     reset () {
       this.time = ''
       this.value = ''
@@ -237,6 +242,7 @@ export default {
     push () {
       this.newDialogFormVisible = true
     },
+    // 获取点击行的数据
     handleClick (row) {
       this.dialogFormVisible = true
       this.form.time = row.time
@@ -244,6 +250,7 @@ export default {
       this.form.url = row.url
       this.form.id = row.id
     },
+    // 删除数据请求
     closeClick (row) {
       this.$axios.get('/juxtserver/info/deleteData', { params: { id: row.id } }).then((res) => {
         if (res.data.status === 200) {

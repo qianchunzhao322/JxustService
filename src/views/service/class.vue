@@ -104,6 +104,7 @@ export default {
     init () {
       this.getData()
     },
+    // 获取数据
     getData () {
       this.$axios.get('/juxtserver/class/getData', { params: { type: '本科生' } }).then((res) => {
         if (res.data.status === 200 && res.data.msg === '所有专业班级数据获取成功') {
@@ -114,6 +115,7 @@ export default {
         }
       })
     },
+    // 添加数据的弹出层
     append (node, data) {
       this.form.label = ''
       this.form.year = ''
@@ -143,6 +145,7 @@ export default {
         this.year = true
       }
     },
+    // 添加数据的发送请求
     pushData (node, data) {
       console.log(node, data)
       const formData = new FormData()
@@ -178,6 +181,7 @@ export default {
       })
       this.dialogFormVisible = false
     },
+    // 修改数据的弹出层
     reset (node, data) {
       this.newForm.year = ''
       if (node.level === 1) {
@@ -188,6 +192,7 @@ export default {
         this.newForm.data = data
       }
     },
+    // 修改数据请求
     resetData (node, data) {
       const formData = new FormData()
       var that = this
@@ -219,6 +224,7 @@ export default {
       })
       this.newDialogFormVisible = false
     },
+    // 删除数据
     remove (node, data) {
       console.log(node, data)
       if (node.level === 1) {
@@ -244,6 +250,7 @@ export default {
         }
       })
     },
+    // 尾部追加
     renderContent (h, { node, data, store }) {
       return (
         <span class="custom-tree-node">

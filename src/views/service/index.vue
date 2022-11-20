@@ -156,6 +156,7 @@ export default {
     window.removeEventListener('resize', this.resize)
   },
   methods: {
+    // 初始化数据和相关的图表
     initItems () {
       this.getPhoto()
       this.getTeacher()
@@ -164,6 +165,7 @@ export default {
       this.getChartSecondData()
       this.getChartThirdData()
     },
+    // 新闻数据
     async getInfo () {
       await this.$axios.get('/jlclient/news', {
         headers: {
@@ -177,6 +179,7 @@ export default {
         }
       })
     },
+    // 图片数据
     async getPhoto () {
       await this.$axios.get('/juxtserver/count/getImagesCount').then((res) => {
         if (res.data.status === 200 && res.data.msg === '各类照片数量获取成功') {
@@ -186,6 +189,7 @@ export default {
         }
       })
     },
+    // 师生数据
     async getTeacher () {
       await this.$axios.get('/juxtserver/count/getAtSchoolCount').then((res) => {
         if (res.data.status === 200 && res.data.msg === '师生数量数据获取成功') {
@@ -195,6 +199,7 @@ export default {
         }
       })
     },
+    // 七天访问量数据
     async getChartFristData () {
       await this.$axios.get('/juxtserver/visit/getData').then((res) => {
         if (res.data.status === 200 && res.data.msg === '近七天的访问量获取成功') {
@@ -206,6 +211,7 @@ export default {
         }
       })
     },
+    // 男女比例数据
     async getChartSecondData () {
       await this.$axios.get('/jlclient/sex').then((res) => {
         if (res.data.status === 200 && res.data.msg === '请求成功') {
@@ -221,6 +227,7 @@ export default {
         }
       })
     },
+    // 获奖信息数据
     async getChartThirdData () {
       await this.$axios.get('/jlclient/awards').then((res) => {
         if (res.data.status === 200 && res.data.msg === '请求成功') {
@@ -237,6 +244,7 @@ export default {
         }
       })
     },
+    // 日历组件函数
     clickDay (data) {
       console.log(data) // 选中某天
     },
@@ -253,6 +261,7 @@ export default {
         this.myChartsThird.resize()
       }, 500)
     },
+    // 实例化图表
     init () {
       // var that = this
       this.myChartsFrist = echarts.init(document.getElementById('chartFrist'))
@@ -262,6 +271,7 @@ export default {
       this.drawSecond(this.eSecondType, this.eSecondData1, this.eSecondData2)
       this.drawThird(this.eThirdYear, this.eThirdPro, this.eThirdCon, this.eThirdSum)
     },
+    // 绘制七天访问量图
     drawFrist (ex, ey) {
       const xLabel = ex
       const valueData = ey
@@ -405,6 +415,7 @@ export default {
       }
       option && this.myChartsFrist.setOption(option)
     },
+    // 绘制男女比例图
     drawSecond (etype, data11, data22) {
       var type = etype
       var data1 = data11
@@ -594,6 +605,7 @@ export default {
       }
       option && this.myChartsSecond.setOption(option)
     },
+    // 绘制获奖信息图
     drawThird (fyear, fpro, fcon, fsum) {
       var year = fyear
       var pro = fpro

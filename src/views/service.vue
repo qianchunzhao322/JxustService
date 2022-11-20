@@ -126,10 +126,12 @@ export default {
     this.isRoot = this.$route.params.isRoot
   },
   methods: {
+    // 获取路由url
     getUrl () {
       this.defaultUrl = this.$route.fullPath
       this.handleSelect(this.defaultUrl)
     },
+    // 模拟动态面包屑
     handleSelect (key, keyPath) {
       if (key === '/service/index') {
         this.bread = '首页'
@@ -178,6 +180,7 @@ export default {
         this.bread = '照片管理 / 校友忆 / 生活照'
       }
     },
+    // 登出操作
     logout () {
       this.visible = false
       // 这个和登录时连接websocket有关，主动关闭websocket
@@ -185,12 +188,14 @@ export default {
       this.$router.push('/login')
       localStorage.removeItem('btapex')
     },
+    // 时间补0函数
     checkTime (i) {
       if (i < 10) {
         i = '0' + i
       }
       return i
     },
+    // 格式化时间
     getTime () {
       var today = new Date()
       var year = this.checkTime(today.getFullYear())

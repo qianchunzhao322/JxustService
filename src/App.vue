@@ -24,6 +24,7 @@ export default {
     // window.addEventListener('beforeunload', (e) => this.beforeunloadHandler(e))
   },
   methods: {
+    // 退出登录删除token
     beforeunloadHandler (e) {
       // alert('为保证系统安全，刷新或不正当进出系统等操作将清除数据，请重新登陆')
       // this.dialogVisible = true

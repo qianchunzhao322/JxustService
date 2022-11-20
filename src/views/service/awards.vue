@@ -110,6 +110,7 @@ export default {
     init () {
       this.getData()
     },
+    // 获取数据
     async getData () {
       await this.$axios.get('/juxtserver/awards/getData').then((res) => {
         if (res.data.status === 200 && res.data.msg === '所有获奖数据获取成功') {
@@ -120,6 +121,7 @@ export default {
         }
       })
     },
+    // 添加数据的弹出层
     append (node, data) {
       this.form.label = ''
       if (node.level === 3) {
@@ -138,6 +140,7 @@ export default {
         this.year = true
       }
     },
+    // 发送添加数据的请求操作
     pushData (node, data) {
       console.log(node, data)
       // const newChild = { id: this.id++, value: '', label: 'testNode', children: [] }
@@ -171,6 +174,7 @@ export default {
       })
       this.dialogFormVisible = false
     },
+    // 修改数据
     reset (node, data) {
       if (data.level === 1) {
         this.$message({ type: 'warning', message: '根节点不可修改' })
@@ -180,6 +184,7 @@ export default {
         this.newForm.data = data
       }
     },
+    // 修改数据的请求
     resetData (node, data) {
       const formData = new FormData()
       var that = this
@@ -205,6 +210,7 @@ export default {
       })
       this.newDialogFormVisible = false
     },
+    // 删除数据
     remove (node, data) {
       console.log(node, data)
       if (node.level === 1) {
@@ -227,6 +233,7 @@ export default {
         }
       })
     },
+    // 树状节点的尾部添加
     renderContent (h, { node, data, store }) {
       return (
         <span class="custom-tree-node">

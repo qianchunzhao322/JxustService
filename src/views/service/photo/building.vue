@@ -245,6 +245,7 @@ export default {
         }
       })
     },
+    // 上传图片函数
     async uploadimg (file, fileList) {
       var that = this
       // const file = event.raw
@@ -333,9 +334,11 @@ export default {
       this.dialogBigVisible = true
       this.dialogImageUrl = row.url
     },
+    // 删除图片
     handleRemove (file, fileList) {
       this.$refs.pictureUpload.uploadFiles = []
     },
+    // 预览图片
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
       this.dialogVisible = true

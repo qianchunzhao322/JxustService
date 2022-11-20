@@ -105,6 +105,7 @@ export default {
     init () {
       this.getData()
     },
+    // 获取数据
     getData () {
       this.$axios.get('/juxtserver/province/getData').then((res) => {
         if (res.data.status === 200 && res.data.msg === '所有本科生源数据获取成功') {
@@ -115,6 +116,7 @@ export default {
         }
       })
     },
+    // 增数据
     append (node, data) {
       this.form.label = ''
       if (node.level === 3) {
@@ -167,6 +169,7 @@ export default {
       })
       this.dialogFormVisible = false
     },
+    // 改数据
     reset (node, data) {
       if (node.level === 1) {
         this.$message({ type: 'warning', message: '根节点不可修改' })
@@ -202,7 +205,7 @@ export default {
       this.newDialogFormVisible = false
       this.newForm.year = ''
     },
-
+    // 删数据
     remove (node, data) {
       if (node.level === 1) {
         this.$message({ type: 'warning', message: '根节点不可删除' })
@@ -217,7 +220,7 @@ export default {
         }
       })
     },
-
+    // 尾部追加
     renderContent (h, { node, data, store }) {
       return (
         <span class="custom-tree-node">

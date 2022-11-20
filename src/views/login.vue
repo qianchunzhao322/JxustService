@@ -76,6 +76,7 @@ export default {
     window.removeEventListener('keydown', this.keyDown)// 销毁回车事件，如果不销毁，在其他页面敲回车也会执行回车登录操作。
   },
   methods: {
+    // 初始化验证码
     init () {
       this.$axios.get('/juxtserver/captcha', {
         responseType: 'arraybuffer'
@@ -87,6 +88,7 @@ export default {
           this.codeImg = res
         })
     },
+    // 检测绑定回车事件
     keyDown (e) {
       if (e.keyCode === 13) { // 13是回车键的keycode
         if (this.username !== '' && this.password !== '') {
@@ -100,6 +102,7 @@ export default {
         }
       }
     },
+    // 登录操作
     login () {
       this.dialogVisible = false
       this.$axios.defaults.headers.post['Content-Type'] = 'application/json'
