@@ -17,6 +17,7 @@ import campus from '../views/service/photo/campus'
 import graduation from '../views/service/photo/graduation'
 import life from '../views/service/photo/life'
 import position from '../views/service/photo/position'
+import photo from '../views/service/postgra/photo'
 
 Vue.use(VueRouter)
 
@@ -90,6 +91,10 @@ const routes = [{
     path: '/service/position',
     name: 'position',
     component: position
+  }, {
+    path: '/service/photo',
+    name: 'photo',
+    component: photo
   }]
 }]
 

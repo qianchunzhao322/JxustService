@@ -1,35 +1,36 @@
 <template>
   <div class="main">
     <el-tree :data="data"
-             node-key="id"
-             ref="rootTree"
-             highlight-current
-             default-expand-all
-             :expand-on-click-node="false">
+            node-key="id"
+            ref="rootTree"
+            highlight-current
+            accordion
+            :default-expanded-keys="[0]"
+            :expand-on-click-node="false">
       <span class="custom-tree-node"
             slot-scope="{ node, data }">
         <span>{{ node.label }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ data.value }}</span>
         <span>
           <el-button type="text"
-                     size="mini"
-                     @click="() => append(node,data)">
+                    size="mini"
+                  @click="() => append(node,data)">
             <i class="el-icon-plus"></i>新增
           </el-button>
           <el-button type="text"
-                     size="mini"
-                     @click="() => reset(node,data)">
+                    size="mini"
+                    @click="() => reset(node,data)">
             <i class="el-icon-edit-outline"></i>编辑
           </el-button>
           <el-button type="text"
-                     size="mini"
-                     @click="() => remove(node,data)">
+                    size="mini"
+                    @click="() => remove(node,data)">
             <i class="el-icon-delete"></i>删除
           </el-button>
         </span>
       </span>
     </el-tree>
     <el-dialog title="新增数据"
-               :visible.sync="dialogFormVisible">
+            :visible.sync="dialogFormVisible">
       <el-form :model="form">
         <el-form-item v-if="year" label="新增年份"
                       :label-width="formLabelWidth">
@@ -49,14 +50,14 @@
         </el-form-item>
       </el-form>
       <div slot="footer"
-           class="dialog-footer">
+          class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary"
-                   @click="pushData(form.data,form.node)">确 定</el-button>
+                  @click="pushData(form.data,form.node)">确 定</el-button>
       </div>
     </el-dialog>
     <el-dialog title="修改数据"
-               :visible.sync="newDialogFormVisible">
+              :visible.sync="newDialogFormVisible">
       <el-form :model="newForm">
         <el-form-item label="修改数据"
                       :label-width="formLabelWidth">
@@ -65,10 +66,10 @@
         </el-form-item>
       </el-form>
       <div slot="footer"
-           class="dialog-footer">
+          class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
         <el-button type="primary"
-                   @click="resetData(newForm.data,newForm.node)">确 定</el-button>
+                  @click="resetData(newForm.data,newForm.node)">确 定</el-button>
       </div>
     </el-dialog>
   </div>

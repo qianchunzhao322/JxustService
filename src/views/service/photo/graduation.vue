@@ -24,6 +24,7 @@
       <!-- 表格 -->
       <el-table :data="tableData"
                 border
+                :default-sort = "{prop: 'time', order: 'descending'}"
                 height="100%"
                 style="width: 100%">
         <el-table-column prop="No"
@@ -266,6 +267,7 @@ export default {
       this.getData()
     },
     push () {
+      this.fileList = []
       this.newDialogFormVisible = true
     },
     async uploadimg (file, fileList) {
@@ -273,17 +275,17 @@ export default {
       // const file = event.raw
       console.log(file)
       const isJPG = file.raw.type === 'image/jpeg' || file.raw.type === 'image/png'
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt5M = file.size / 1024 / 1024 < 5
 
       if (!isJPG) {
         that.$message.error('格式不对，上传图片只能是 JPG、PNG 格式!')
         file.url = ''
       }
-      if (!isLt2M) {
-        that.$message.error('上传图片大小不能超过 2MB!')
+      if (!isLt5M) {
+        that.$message.error('上传图片大小不能超过 5MB!')
         file.url = ''
       }
-      if (isJPG && isLt2M) {
+      if (isJPG && isLt5M) {
         const formData = new FormData()
         formData.append('image', file.raw)
         await that.$axios.post('/admin/uploadImg', formData, {

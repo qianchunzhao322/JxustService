@@ -37,11 +37,18 @@
       label="本科生"
       >
     </el-table-column>
+    <el-table-column label="研究生">
     <el-table-column
-      prop="postgraduate"
-      label="研究生"
+      prop="localPostgra"
+      label="研究生（本校自考）"
       >
     </el-table-column>
+    <el-table-column
+      prop="unlocalPostgra"
+      label="研究生（外校考入）"
+      >
+    </el-table-column>
+  </el-table-column>
     <el-table-column
       prop="time"
       label="更新时间"
@@ -87,8 +94,11 @@
     <el-form-item label="本科生人数" :label-width="formLabelWidth">
       <el-input v-model="form.undergrad" autocomplete="off"></el-input>
     </el-form-item>
-    <el-form-item label="研究生人数" :label-width="formLabelWidth">
-      <el-input v-model="form.postgraduate" autocomplete="off"></el-input>
+    <el-form-item label="研究生人数(本校自考)" :label-width="formLabelWidth">
+      <el-input v-model="form.localPostgra" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="研究生人数（外校考入）" :label-width="formLabelWidth">
+      <el-input v-model="form.unlocalPostgra" autocomplete="off"></el-input>
     </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
@@ -116,7 +126,8 @@ export default {
         associateProfessor: '',
         lecturer: '',
         undergrad: '',
-        postgraduate: ''
+        unlocalPostgra: '',
+        localPostgra: ''
       }
       // formLabelWidth: '120px'
     }
@@ -144,7 +155,8 @@ export default {
       this.form.lecturer = row.lecturer
       this.form.associateProfessor = row.associateProfessor
       this.form.undergrad = row.undergrad
-      this.form.postgraduate = row.postgraduate
+      this.form.localPostgra = row.localPostgra
+      this.form.unlocalPostgra = row.unlocalPostgra
     },
     append () {
       this.newDialogFormVisible = false
@@ -173,7 +185,8 @@ export default {
       this.dialogFormVisible = false
       const formData = {}
       formData.year = this.form.year
-      formData.postgraduate = this.form.postgraduate
+      formData.postgraduate = parseInt(this.form.localPostgra) + parseInt(this.form.unlocalPostgra)
+      formData.localPostgra = this.form.localPostgra
       formData.undergrad = this.form.undergrad
       formData.associateProfessor = this.form.associateProfessor
       formData.lecturer = this.form.lecturer

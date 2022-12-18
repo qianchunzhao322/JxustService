@@ -4,137 +4,82 @@
       <el-input placeholder="请输入毕业年份"
                 v-model="year">
       </el-input>
-      <el-input placeholder="请输入专业"
-                v-model="major">
-      </el-input>
-      <el-input placeholder="请输入班级"
-                v-model="classes">
-      </el-input>
       <el-button type="primary"
-                 @click="search"
-                 plain>查询</el-button>
+                @click="search"
+                plain>查询</el-button>
       <el-button type="info"
-                 @click="reset"
-                 plain>重置</el-button>
+                @click="reset"
+                plain>重置</el-button>
       <el-button type="danger"
-                 @click="push"
-                 plain>新增</el-button>
+                @click="push"
+                plain>新增</el-button>
     </div>
     <div class="body">
       <!-- 表格 -->
       <el-table :data="tableData"
                 border
+                :default-sort = "{prop: 'time', order: 'descending'}"
                 height="100%"
                 style="width: 100%">
         <el-table-column prop="No"
-                         label="序号"
-                         >
+                        label="序号">
         </el-table-column>
-        <el-table-column prop="time"
-                         label="毕业年份"
-                         >
-        </el-table-column>
-        <el-table-column prop="major"
-                         label="专业"
-                         >
-        </el-table-column>
-        <el-table-column prop="class"
-                         label="班级"
-                         >
-        </el-table-column>
-        <el-table-column prop="type"
-                         label="照片类型"
-                         >
-        </el-table-column>
-        <el-table-column prop="name"
-                         label="照片名称">
+        <el-table-column prop="graduateYear"
+                        label="毕业年份(届)">
         </el-table-column>
         <el-table-column label="图片简略图">
           <template slot-scope="scope">
             <div style="margin-left: 0.25rem; height:0.22rem;weight:0.22rem"> <img :src="scope.row.url"
             style="height:100%;weight:100%"
-                 alt=""></div>
+                alt=""></div>
           </template>
         </el-table-column>
-        <el-table-column label="操作"
-                         >
+        <el-table-column label="操作">
           <template slot-scope="scope">
-            <!-- <el-button @click="handleClick(scope.row)"
-                       type="text"
-                       style="color: #29B3B7"
-                       size="small">编辑</el-button> -->
             <el-button @click="closeClick(scope.row)"
-                       type="text"
-                       style="color: red"
-                       size="small">删除</el-button>
+                      type="text"
+                      style="color: red"
+                      size="small">删除</el-button>
             <el-button @click="openClick(scope.row)"
-                       type="text"
-                       style="color: black"
-                       size="small">展开照片</el-button>
+                      type="text"
+                      style="color: black"
+                      size="small">展开照片</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <!-- 编辑弹窗 -->
       <!-- 新增弹窗 -->
-      <el-dialog title="新增打卡点"
-                 :visible.sync="newDialogFormVisible">
+      <el-dialog title="新增毕业照"
+                :visible.sync="newDialogFormVisible">
         <el-form :model="newForm">
           <el-form-item label="毕业年份"
                         :label-width="formLabelWidth">
             <el-select v-model="newForm.year"
-                       style="width:100%"
-                       clearable
-                       @change="yearChangeToMajor($event)"
-                       placeholder="请选择毕业年份">
+                      style="width:100%"
+                      clearable
+                      @change="yearChangeToMajor($event)"
+                      placeholder="请选择毕业年份">
               <el-option v-for="item in newYearOptions"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="专业"
-                        :label-width="formLabelWidth">
-            <el-select v-model="newForm.major"
-                       clearable
-                       @change="majorChangeToClass"
-                       style="width:100%"
-                       placeholder="请选择专业">
-              <el-option v-for="item in newMajorOptions"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="班级"
-                        :label-width="formLabelWidth">
-            <el-select v-model="newForm.class"
-                       style="width:100%"
-                       clearable
-                       placeholder="请选择毕业班级">
-              <el-option v-for="item in newClassOptions"
-                         :key="item.value"
-                         :label="item.label"
-                         :value="item.value">
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
         </el-form>
         <el-upload action=""
-                   :file-list="fileList"
-                   ref="pictureUpload"
-                   list-type="picture-card"
-                   :on-change="uploadimg"
-                   :limit="1"
-                   :auto-upload="false">
+                  :file-list="fileList"
+                  ref="pictureUpload"
+                  list-type="picture-card"
+                  :on-change="uploadimg"
+                  :limit="1"
+                  :auto-upload="false">
           <i slot="default"
-             class="el-icon-plus"></i>
+            class="el-icon-plus"></i>
           <div slot="file"
-               slot-scope="{file}">
+              slot-scope="{file}">
             <img class="el-upload-list__item-thumbnail"
-                 :src="file.url"
-                 alt="">
+                :src="file.url"
+                alt="">
             <span class="el-upload-list__item-actions">
               <span class="el-upload-list__item-preview"
                     @click="handlePictureCardPreview(file)">
@@ -150,20 +95,22 @@
         </el-upload>
         <el-dialog :visible.sync="dialogVisible">
           <img width="100%"
-               :src="dialogImageUrl"
-               alt="">
+              :src="dialogImageUrl"
+              alt="">
         </el-dialog>
         <div slot="footer"
-             class="dialog-footer">
+            class="dialog-footer">
           <el-button @click="newDialogFormVisible = false">取 消</el-button>
           <el-button type="primary"
-                     @click="pushData">确 定</el-button>
+                    @click="pushData">确 定</el-button>
         </div>
       </el-dialog>
       <!-- 大图弹窗 -->
       <el-dialog title="展开图片"
-                 :visible.sync="dialogBigVisible">
-        <img :src="dialogImageUrl" alt="" style="width:60%;height:60%">
+                :visible.sync="dialogBigVisible">
+        <img :src="dialogImageUrl"
+            alt=""
+            style="width:60%;height:60%">
       </el-dialog>
     </div>
   </div>
@@ -171,12 +118,10 @@
 
 <script>
 export default {
-  name: 'life',
+  name: 'photo',
   data () {
     return {
       year: '',
-      major: '',
-      classes: '',
       fileList: [],
       tableData: [],
       dialogImageUrl: '',
@@ -187,23 +132,9 @@ export default {
       dialogBigVisible: false,
       newForm: {
         year: '',
-        major: '',
-        class: '',
-        name: '',
         returnImgUrl: ''
       },
-      newYearOptions: [{
-        label: 1999,
-        value: 1999
-      }],
-      newMajorOptions: [{
-        label: 1999,
-        value: 1999
-      }],
-      newClassOptions: [{
-        label: 1999,
-        value: 1999
-      }],
+      newYearOptions: [],
       formLabelWidth: '120px'
     }
   },
@@ -213,32 +144,19 @@ export default {
   methods: {
     init () {
       this.getData()
-      this.getItemsYears()
+      this.getItemsYjsYears()
     },
-    async getItemsYears () {
-      await this.$axios.get('/jlclient/getItems/getYear').then((res) => {
+    async getItemsYjsYears () {
+      await this.$axios.get('/juxtserver/postgraduate/getPostGraYear').then((res) => {
         if (res.data.status === 200 && res.data.msg === '请求成功') {
           this.newYearOptions = res.data.data.year
         }
       })
     },
-    yearChangeToMajor (event) {
-      this.$axios.get('/jlclient/getItems/getMajor', { params: { graduateYear: this.newForm.year } }).then((res) => {
-        if (res.data.status === 200 && res.data.msg === '请求成功') {
-          this.newMajorOptions = res.data.data.major
-        }
-      })
-    },
-    majorChangeToClass () {
-      this.$axios.get('/jlclient/getItems/getClsss', { params: { graduateYear: this.newForm.year, majorName: this.newForm.major } }).then((res) => {
-        if (res.data.status === 200 && res.data.msg === '请求成功') {
-          this.newClassOptions = res.data.data.class
-        }
-      })
-    },
     getData () {
-      this.$axios.get('/juxtserver/photo/life/getData').then((res) => {
-        if (res.data.status === 200 && res.data.msg === '所有生活照信息查询成功') {
+      this.$axios.get('/juxtserver/postgraduate/getImages').then((res) => {
+        console.log(res)
+        if (res.data.status === 200 && res.data.msg === '研究生照片信息获取成功') {
           this.tableData = res.data.data.data
         } else {
           this.$message({ type: 'error', message: res.data.msg })
@@ -246,30 +164,22 @@ export default {
       })
     },
     async search () {
-      const formData = new FormData()
-      formData.append('graduateYear', '' + this.year)
-      formData.append('majorName', '' + this.major)
-      formData.append('className', '' + this.classes)
-      await this.$axios.post('/juxtserver/photo/life/selectData', formData, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then((res) => {
+      this.$axios.get('/juxtserver/postgraduate/getPostGraInfoByYear', { params: { graduateYear: this.year } }).then((res) => {
         if (res.data.status === 200) {
           this.$message({ type: 'success', message: res.data.msg })
           this.tableData = res.data.data.data
+          console.log(res.data.data.data)
         } else {
           this.$message({ type: 'error', message: res.data.msg })
         }
       })
     },
     reset () {
-      this.campus = ''
-      this.name = ''
-      this.classes = ''
+      this.year = ''
       this.getData()
     },
     push () {
+      this.fileList = []
       this.newDialogFormVisible = true
     },
     async uploadimg (file, fileList) {
@@ -277,17 +187,17 @@ export default {
       // const file = event.raw
       console.log(file)
       const isJPG = file.raw.type === 'image/jpeg' || file.raw.type === 'image/png'
-      const isLt5M = file.size / 1024 / 1024 < 5
+      const isLt11M = file.size / 1024 / 1024 < 11
 
       if (!isJPG) {
         that.$message.error('格式不对，上传图片只能是 JPG、PNG 格式!')
         file.url = ''
       }
-      if (!isLt5M) {
-        that.$message.error('上传图片大小不能超过 5MB!')
+      if (!isLt11M) {
+        that.$message.error('上传图片大小不能超过 11MB!')
         file.url = ''
       }
-      if (isJPG && isLt5M) {
+      if (isJPG && isLt11M) {
         const formData = new FormData()
         formData.append('image', file.raw)
         await that.$axios.post('/admin/uploadImg', formData, {
@@ -312,9 +222,9 @@ export default {
     async pushData () {
       this.newDialogFormVisible = false
       const formData = new FormData()
-      formData.append('className', '' + this.newForm.class)
+      formData.append('graduateYear', '' + this.newForm.year)
       formData.append('url', '' + this.newForm.returnImgUrl)
-      await this.$axios.post('/juxtserver/photo/life/pushData', formData, {
+      await this.$axios.post('/juxtserver/postgraduate/images', formData, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -332,7 +242,7 @@ export default {
       console.log(row)
     },
     closeClick (row) {
-      this.$axios.get('/juxtserver/photo/life/deleteData', { params: { className: row.class, delUrl: row.url } }).then((res) => {
+      this.$axios.get('/juxtserver/postgraduate/deleteImages', { params: { graduateYear: row.graduateYear, delUrl: row.url } }).then((res) => {
         if (res.data.status === 200) {
           this.$message({ type: 'success', message: res.data.msg })
           this.getData()
@@ -365,7 +275,7 @@ export default {
     width: 100%;
     height: 10%;
     background-color: #fff;
-    .el-input{
+    .el-input {
       width: 15%;
       float: left;
       margin-top: 1%;
@@ -373,11 +283,11 @@ export default {
       height: 0.3rem;
       font-size: 0.08rem;
       justify-items: center;
-      /deep/ .el-input__inner{
+      /deep/ .el-input__inner {
         height: 84%;
       }
     }
-    .el-button{
+    .el-button {
       margin-top: 1%;
       margin-left: 2%;
       font-size: 0.1rem;

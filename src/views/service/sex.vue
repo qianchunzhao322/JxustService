@@ -4,7 +4,8 @@
       :data="data"
       node-key="id"
       highlight-current
-      default-expand-all
+      accordion
+      :default-expanded-keys="[0]"
       :expand-on-click-node="false">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ data.value }}</span>

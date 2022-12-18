@@ -3,8 +3,9 @@
     <el-tree
       :data="data"
       node-key="id"
+      accordion
+      :default-expanded-keys="[0]"
       highlight-current
-      default-expand-all
       :expand-on-click-node="false">
       <span class="custom-tree-node" slot-scope="{ node, data }">
         <span>{{ node.label }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ data.value }}</span>

@@ -24,10 +24,20 @@
             <i class="el-icon-user"></i>
             <span slot="title">师生管理</span>
           </el-menu-item>
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-s-unfold"></i>
+              <span>研究生管理</span>
+            </template>
           <el-menu-item index="/service/underGraduation">
             <i class="el-icon-s-custom"></i>
-            <span slot="title">研究生</span>
+            <span slot="title">研究生（届）</span>
           </el-menu-item>
+          <el-menu-item index="/service/photo">
+            <i class="el-icon-picture"></i>
+            <span slot="title">毕业照</span>
+          </el-menu-item>
+        </el-submenu>
           <el-menu-item index="/service/class">
             <i class="el-icon-bangzhu"></i>
             <span slot="title">班级管理</span>
@@ -143,7 +153,10 @@ export default {
         this.bread = '师生管理'
         this.timeVisiable = true
       } else if (key === '/service/underGraduation') {
-        this.bread = '研究生管理'
+        this.bread = '研究生管理 / 研究生（届）'
+        this.timeVisiable = true
+      } else if (key === '/service/photo') {
+        this.bread = '研究生管理 / 毕业照'
         this.timeVisiable = true
       } else if (key === '/service/class') {
         this.bread = '班级管理'

@@ -118,22 +118,8 @@ export default {
       this.form.label = ''
       this.form.year = ''
       this.form.class = ''
-      if (node.level === 4) {
-        this.$message({ type: 'warning', message: '最大层级为4级，不可新增了' })
-      } else if (node.level === 3) {
-        this.form.node = node
-        this.form.data = data
-        this.dialogFormVisible = true
-        this.classes = true
-        this.level = false
-        this.year = false
-      } else if (node.level === 2) {
-        this.form.node = node
-        this.form.data = data
-        this.dialogFormVisible = true
-        this.level = true
-        this.year = false
-        this.classes = false
+      if (node.level === 2) {
+        this.$message({ type: 'warning', message: '最大层级为2级，不可新增了' })
       } else if (node.level === 1) {
         this.form.node = node
         this.form.data = data
