@@ -16,33 +16,57 @@
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
           </el-menu-item>
-          <el-menu-item v-if="isRoot" index="/service/superman">
+          <el-menu-item v-if="isRoot"
+                        index="/service/superman">
             <i class="el-icon-s-home"></i>
             <span slot="title">超级管理</span>
           </el-menu-item>
-          <el-menu-item index="/service/teacher">
-            <i class="el-icon-user"></i>
-            <span slot="title">师生管理</span>
-          </el-menu-item>
+
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-s-unfold"></i>
-              <span>研究生管理</span>
+              <span>基础管理</span>
             </template>
-          <el-menu-item index="/service/underGraduation">
-            <i class="el-icon-s-custom"></i>
-            <span slot="title">研究生（届）</span>
+            <el-menu-item index="/service/teacher">
+            <i class="el-icon-user"></i>
+            <span slot="title">师生管理</span>
           </el-menu-item>
-          <el-menu-item index="/service/photo">
-            <i class="el-icon-picture"></i>
-            <span slot="title">毕业照</span>
-          </el-menu-item>
-        </el-submenu>
           <el-menu-item index="/service/class">
             <i class="el-icon-bangzhu"></i>
             <span slot="title">班级管理</span>
           </el-menu-item>
-          <el-submenu index="">
+          <el-menu-item index="/service/awards">
+            <i class="el-icon-medal-1"></i>
+            <span slot="title">竞赛获奖</span>
+          </el-menu-item>
+          <el-menu-item index="/service/from">
+            <i class="el-icon-receiving"></i>
+            <span slot="title">本科生源</span>
+          </el-menu-item>
+          <el-menu-item index="/service/togo">
+            <i class="el-icon-s-promotion"></i>
+            <span slot="title">毕业去向</span>
+          </el-menu-item>
+          <el-menu-item index="/service/sex">
+            <i class="el-icon-pie-chart"></i>
+            <span slot="title">男女比例</span>
+          </el-menu-item>
+          </el-submenu>
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-s-unfold"></i>
+              <span>研究生管理</span>
+            </template>
+            <el-menu-item index="/service/underGraduation">
+              <i class="el-icon-s-custom"></i>
+              <span slot="title">研究生（届）</span>
+            </el-menu-item>
+            <el-menu-item index="/service/photo">
+              <i class="el-icon-picture"></i>
+              <span slot="title">毕业照</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-picture-outline"></i>
               <span>照片管理</span>
@@ -62,22 +86,21 @@
               <el-menu-item index="/service/life">生活照</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="/service/awards">
-            <i class="el-icon-medal-1"></i>
-            <span slot="title">竞赛获奖</span>
-          </el-menu-item>
-          <el-menu-item index="/service/from">
-            <i class="el-icon-receiving"></i>
-            <span slot="title">本科生源</span>
-          </el-menu-item>
-          <el-menu-item index="/service/togo">
-            <i class="el-icon-s-promotion"></i>
-            <span slot="title">毕业去向</span>
-          </el-menu-item>
-          <el-menu-item index="/service/sex">
-            <i class="el-icon-pie-chart"></i>
-            <span slot="title">男女比例</span>
-          </el-menu-item>
+          <el-submenu index="4">
+            <template slot="title">
+              <i class="el-icon-s-unfold"></i>
+              <span>教师管理</span>
+            </template>
+            <el-menu-item index="/service/teacherConf">
+              <i class="el-icon-s-custom"></i>
+              <span slot="title">教师信息录入</span>
+            </el-menu-item>
+            <el-menu-item index="/service/teacherHist">
+              <i class="el-icon-picture"></i>
+              <span slot="title">历史风采</span>
+            </el-menu-item>
+          </el-submenu>
+
           <el-menu-item index="/service/info">
             <i class="el-icon-s-comment"></i>
             <span slot="title">最新动态</span>
@@ -87,22 +110,26 @@
       <el-container>
         <el-header>
           <div class="same router">{{bread }}</div>
-          <div class="same time" v-if="timeVisiable">{{nowTime}}</div>
+          <div class="same time"
+               v-if="timeVisiable">{{nowTime}}</div>
           <div class="same avatar">
             <div class="img"></div>
             <!-- <div class="name">管理员</div> -->
-            <el-popover
-  placement="top"
-  style="padding-left: 0.1rem"
-  width="1rem"
-  v-model="visible">
-  <p>确定要退出吗？</p>
-  <div style="text-align: right; margin: 0">
-    <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-    <el-button type="primary" size="mini" @click="logout">确定</el-button>
-  </div>
-  <el-button slot="reference">管理员</el-button>
-</el-popover>
+            <el-popover placement="top"
+                        style="padding-left: 0.1rem"
+                        width="1rem"
+                        v-model="visible">
+              <p>确定要退出吗？</p>
+              <div style="text-align: right; margin: 0">
+                <el-button size="mini"
+                           type="text"
+                           @click="visible = false">取消</el-button>
+                <el-button type="primary"
+                           size="mini"
+                           @click="logout">确定</el-button>
+              </div>
+              <el-button slot="reference">管理员</el-button>
+            </el-popover>
           </div>
         </el-header>
         <el-main>
@@ -150,7 +177,7 @@ export default {
         this.bread = '超级管理'
         this.timeVisiable = true
       } else if (key === '/service/teacher') {
-        this.bread = '师生管理'
+        this.bread = '基础管理 / 师生管理'
         this.timeVisiable = true
       } else if (key === '/service/underGraduation') {
         this.bread = '研究生管理 / 研究生（届）'
@@ -159,20 +186,20 @@ export default {
         this.bread = '研究生管理 / 毕业照'
         this.timeVisiable = true
       } else if (key === '/service/class') {
-        this.bread = '班级管理'
+        this.bread = '基础管理 / 班级管理'
         this.timeVisiable = true
       } else if (key === '/service/awards') {
         this.timeVisiable = true
-        this.bread = '竞赛获奖'
+        this.bread = '基础管理 / 竞赛获奖'
       } else if (key === '/service/from') {
         this.timeVisiable = true
-        this.bread = '本科生源'
+        this.bread = '基础管理 / 本科生源'
       } else if (key === '/service/togo') {
         this.timeVisiable = true
-        this.bread = '毕业去向'
+        this.bread = '基础管理 / 毕业去向'
       } else if (key === '/service/sex') {
         this.timeVisiable = true
-        this.bread = '男女比例'
+        this.bread = '基础管理 / 男女比例'
       } else if (key === '/service/info') {
         this.timeVisiable = true
         this.bread = '最新动态'
@@ -191,6 +218,12 @@ export default {
       } else if (key === '/service/life') {
         this.timeVisiable = true
         this.bread = '照片管理 / 校友忆 / 生活照'
+      } else if (key === '/service/teacherConf') {
+        this.timeVisiable = true
+        this.bread = '教师管理 / 教师信息导入'
+      } else if (key === '/service/teacherHist') {
+        this.timeVisiable = true
+        this.bread = '教师管理 / 历史风采'
       }
     },
     // 登出操作

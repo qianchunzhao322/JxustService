@@ -18,6 +18,8 @@ import graduation from '../views/service/photo/graduation'
 import life from '../views/service/photo/life'
 import position from '../views/service/photo/position'
 import photo from '../views/service/postgra/photo'
+import teacherConf from '../views/service/teacher_conf.vue'
+import teacherHist from '../views/service/teacher_hist.vue'
 
 Vue.use(VueRouter)
 
@@ -95,6 +97,14 @@ const routes = [{
     path: '/service/photo',
     name: 'photo',
     component: photo
+  }, {
+    path: '/service/teacherConf',
+    name: 'teacherConf',
+    component: teacherConf
+  }, {
+    path: '/service/teacherHist',
+    name: 'teacherHist',
+    component: teacherHist
   }]
 }]
 

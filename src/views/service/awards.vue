@@ -116,6 +116,7 @@ export default {
       await this.$axios.get('/juxtserver/awards/getData').then((res) => {
         if (res.data.status === 200 && res.data.msg === '所有获奖数据获取成功') {
           this.data = res.data.data
+          console.log(this.data)
           this.id = res.data.data[0].maxId
         } else {
           this.$message({ type: 'error', message: res.data.msg })
